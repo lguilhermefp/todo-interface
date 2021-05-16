@@ -23,26 +23,28 @@ interface IStateProps {
 }
 
 interface IDispatchProps {
-  loadRequest() : void
+  createTask() : IStateProps
+  deleteTask() : IStateProps
+  updateTask() : IStateProps
 }
 
 type IProps = IStateProps & IDispatchProps;
 
 class TaskList extends Component<IProps> {
 
-  componentDidMount() {
-    const { loadRequest } = this.props;
-
-    loadRequest();
-  }
-
   render(){
 
     const { tasks } = this.props;
+    const { createTask } = this.props;
+    const { deleteTask } = this.props;
+    const { updateTask } = this.props;
 
     return(
       <TasksWrapper>
-        {tasks.map((task) => task.title)}
+        <button className='create-task' onClick={(e)=>(createTask())}></button>
+        <button className='delete-task' onClick={(e)=>(deleteTask())}></button>
+        <button className='update-task' onClick={(e)=>(updateTask())}></button>
+        {tasks.map((task) => <div>{task.title}</div>)}
       </TasksWrapper>
     );
   }

@@ -1,7 +1,10 @@
 export enum TasksTypes {
     LOAD_REQUEST = '@store/LOAD_REQUEST',
     LOAD_SUCCESS = '@store/LOAD_SUCCESS',
-    LOAD_FAILURE = '@store/LOAD_FAILURE'
+    LOAD_FAILURE = '@store/LOAD_FAILURE',
+    CREATE_TASK = '@store/CREATE_TASK',
+    DELETE_TASK = '@store/DELETE_TASK',
+    UPDATE_TASK = '@store/UPDATE_TASK'
 };
 
 export interface ITask {
@@ -12,7 +15,5 @@ export interface ITask {
 }
 
 export interface ITasksState {
-    readonly data: ITask[],
-    readonly loading: boolean,
-    readonly error: boolean
+    data: ITask[],
 }

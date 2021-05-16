@@ -45,7 +45,7 @@ function TaskContent() : JSX.Element {
     <>
       <Search />
       <TaskContentTitle>Tarefas</TaskContentTitle>
-      {/* <TaskList /> */}
+      <TaskList />
       <CreateNewTask />
     </>
   );

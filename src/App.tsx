@@ -12,14 +12,15 @@ import { Provider } from 'react-redux';
 function App() : JSX.Element {
   return (
     <Provider store={store}>
-              <TaskList />
         <Router>
           <Switch>
             <Route path='/api/' component={HomeScreen}></Route>
-            <Route path='/api/tasks/' component={TasksScreen}></Route>
-            <Route path='/api/tasks/new/' component={NewTaskForm}></Route>
-            <Route path='/api/tasks/modify/' component={ModifyTaskForm}></Route>
-            <Route path='/api/tasks/:id/' component={Task}></Route>
+            <Route path='/api/tasks/' component={TasksScreen}>
+              <Route path='/api/tasks/new/' component={NewTaskForm}></Route>
+              <Route path='/api/tasks/:id/' component={Task}></Route>
+              <Route path='/api/tasks/:id/modify/' component={ModifyTaskForm}></Route>
+            </Route>
+            
             <Route path='' component={PageNotFound}></Route>
           </Switch>
         </Router>
