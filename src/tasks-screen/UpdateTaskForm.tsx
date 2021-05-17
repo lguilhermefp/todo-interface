@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import NewTaskFormContainer from './NewTaskForm';
+import Form from './Form';
 
-function ModifyTaskForm(){
+function UpdateTaskForm(){
     return(
-        <ModifyTaskFormContainer>
+        <UpdateTaskFormContainer>
             <div>
                 <h1>title</h1>
                 <input></input>
@@ -11,10 +11,12 @@ function ModifyTaskForm(){
                 <button></button>
                 <button></button>
             </div>
-        </ModifyTaskFormContainer>
+        </UpdateTaskFormContainer>
     );
 }
 
-const ModifyTaskFormContainer = styled(NewTaskFormContainer)``;
+const UpdateTaskFormContainer = styled(Form)`
+    background-color: grey;
+`;
 
-export default ModifyTaskForm;
+export default UpdateTaskForm;

@@ -1,19 +1,31 @@
 import styled from 'styled-components';
 import iconDone from '../img/iconDone.svg';
 
-function TaskCard() : JSX.Element {
-    return(
-        <TaskCardWrapper>
-          <h3>title</h3>
-          <h4>Descrição da tarefa.</h4>
-          <StateOfTask />
-          <button></button>
+function TaskListItem({task, onRemovePressed, onUpdatePressed, onCompletePressed} : any) : JSX.Element {
+  return(
+        <>
+          <h3>{task.title}</h3>
+          <h4>{task.description}</h4>
           <div>
-            <button className="remove-button">Remove</button>
-          </div>
-        </TaskCardWrapper>
-    );
-}
+            <div className="dropdown">
+              <button
+                className="remove-button">Remove
+                onRemovePressed={onRemovePressed}</button>
+              <button
+                className="update-button">Update
+                onUpdatePressed={onUpdatePressed}</button>
+            </div>
+            <div className="button-situation-container">
+              {task.situation === 'complete'
+                ? null
+                : <button
+                    onClick={() => onCompletePressed(task.text)}></button>}
+            </div>
+        </>
+  )
+      }}}}}
+    
+
 
 const TaskCardWrapper = styled.div`
   display: grid;
@@ -73,4 +85,13 @@ function InProgress() : JSX.Element {
   );
 }
 
-export default TaskCard;
+const mapStateToProps = (state : any) => ({
+    tasks: state.tasks
+});
+const mapDispatchToProps = (dispatch : any) => ({
+    onRemovePressed : (text : any) => dispatch(removeTask(text)),
+    onRemovePressed : (text : any) => dispatch(removeTask(text)),
+    onRemovePressed : (text : any) => dispatch(removeTask(text))
+});
+
+export default TaskListItem;

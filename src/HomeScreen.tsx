@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SideBar from './SideBar';
+import SideBar from './sidebar/Sidebar';
 
 function HomeScreen() : JSX.Element {
   return(
