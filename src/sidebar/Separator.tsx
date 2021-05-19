@@ -7,7 +7,7 @@ function Separator() : JSX.Element {
 const BarSeparator : any = styled.div`
   background-color: white;
   width: 80%;
-  margin: 10%;
+  margin: 20% 10%;
   height: 1px;
 `;
 

@@ -13,22 +13,24 @@ function SidebarButtons(){
 }
 
 function TasksButton() : JSX.Element {
-  return(
-    <SideBarButton>
-        <Link to="/api/tasks">
-            <img src={iconTasks} className="icon-tasks" alt="tarefas" />
-            <h3 className="tasks">Tarefas</h3>
+    return(
+        <Link to="/tasks">
+            <SideBarButton>
+                <img src={iconTasks} className="icon-tasks" alt="tarefas" />
+                <h3 className="tasks">Tarefas</h3>
+            </SideBarButton>
         </Link>
-    </SideBarButton>
-  );
+    );
 }
   
   function AboutButton() : JSX.Element {
     return(
-      <SideBarButton>
-        <img src={iconAbout} className="icon-about" alt="sobre" />
-        <h3 className="about">Sobre</h3>
-      </SideBarButton>
+        <Link to="/about">
+          <SideBarButton>
+            <img src={iconAbout} className="icon-about" alt="sobre" />
+            <h3 className="about">Sobre</h3>
+          </SideBarButton>
+       </Link>
     );
   }
 
@@ -48,6 +50,12 @@ function TasksButton() : JSX.Element {
   width: 80%;
   margin: 0 10% 3vh 10%;
   outline: inherit;
+
+  & a {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
+export {};
 export default SidebarButtons;

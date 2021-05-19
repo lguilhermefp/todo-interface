@@ -3,15 +3,19 @@ import UserCard from './UserCard';
 import Separator from './Separator';
 import SideBarButtons from './SidebarButtons';
 import styled from 'styled-components';
+import cornerMenu from '../img/cornerMenu.svg';
 
 function Sidebar() : JSX.Element {
   return(
+    <>
+      <img src={cornerMenu} alt="menu"/>
       <SideBarWrapper>
         <Logo />
         <UserCard />
         <Separator />
         <SideBarButtons />
       </SideBarWrapper>
+    </>
   );
 }
 
@@ -22,7 +26,7 @@ const SideBarWrapper : any = styled.div`
   flex-grow: 1;
   height: 65vh;
   min-height: 360px;
-  width: 400px;
+  width: 100vw;
   background-color: #0047FF;
 
   & a {

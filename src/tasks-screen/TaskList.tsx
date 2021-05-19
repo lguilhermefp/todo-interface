@@ -9,7 +9,7 @@ function TaskList({ tasks=[], onRemovePressed, onUpdatePressed, onCompletePresse
               {tasks.map((task : any) => 
                 <TaskListItem
                   task={task}
-                  
+                  key={task.guid}
                   onRemovePressed={onRemovePressed}
                   onUpdatePressed={onUpdatePressed}
                   onCompletePressed={onCompletePressed}
@@ -20,7 +20,7 @@ function TaskList({ tasks=[], onRemovePressed, onUpdatePressed, onCompletePresse
 }
 
 const TasksWrapper = styled.div`
-  min-height: 38vh;
+  min-height: 59vh;
   margin-bottom: 3vh;
   overflow: auto;
 
@@ -35,7 +35,7 @@ const mapStateToProps = (state : any) => ({
 
 const mapDispatchToProps = (dispatch : any) => ({
     onRemovePressed: (guid : string) => dispatch(removeTask(guid)),
-    onUpdatePressed: (task : any) => dispatch(updateTaskDetails(task)),
+    onUpdatePressed: (guid : string, title : string, description : string) => dispatch(updateTaskDetails(guid, title, description)),
     onCompletePressed: (guid : string) => dispatch(markTaskAsCompleted(guid))
 })
 

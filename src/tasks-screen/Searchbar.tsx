@@ -13,26 +13,32 @@ function Searchbar() : JSX.Element {
   }
   const SearchBarWrapper = styled.div`
     display: flex;
-    margin-top: 9vh;
-    height: 14vh;
+    height: 8vh;
     justify-content: bottom;
+    min-width: calc(85vw - 210px);
+    margin: 5vh 0;
   
-    & > div{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 50%;
-    width: 100%;
-    border-radius: 3px;
-    background-color: #000;
-    opacity: 0.12;
+    & > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      height: 80%;
+      padding: 0 3vw;
+      width: 100%;
+      border-radius: 3px;
+      background-color: #DDD;
     }
     & > div > img {
-      width: 30%;
+      width: 20%;
+      height: 90%;
     }
     & > div > .search-input {
-      width: 70%;
+      width: 80%;
+      height: 65%;
+      color: rgba(0, 0, 0, 1);
+      font-size: 15px;
     }
   `;
 
-  export default Searchbar;
+export {};
+export default Searchbar;
