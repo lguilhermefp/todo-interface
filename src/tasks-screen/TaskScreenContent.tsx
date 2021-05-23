@@ -1,5 +1,4 @@
 import Searchbar from './Searchbar';
-import iconPlus from '../img/iconPlus.svg';
 import TaskList from './TaskList';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -16,17 +15,17 @@ function TaskScreenContent() : JSX.Element {
 }
 
 const TaskContentTitle = styled.h1`
-  margin: 5vh 2.5% 0;
+  margin: 3vh 2.5% 0;
   font-size: 30px;
 `;
 function ButtonCreateNewTask() : JSX.Element {
 
   return(
     <NewTaskFormContainer>
-      <Link to="/tasks/modify">
+      <Link to="/tasks/create">
         <button>
-          <img src={iconPlus} alt="+" />
-          <h3>Nova tarefa</h3>
+          <h3>+</h3>
+          <h4>NOVA TAREFA</h4>
         </button>
       </Link>
     </NewTaskFormContainer>
@@ -34,14 +33,30 @@ function ButtonCreateNewTask() : JSX.Element {
   );
 }
 const NewTaskFormContainer = styled.div`
+  display: flex;
   color: white;
-  border-radius: 5px;
-  height: 10%;
-  width: 25% !important;
-  margin: auto 2.5% 2.5% auto;
+  height: 7%;
+  width: 23% !important;
+  margin: 5vh 2.5% 2.5% auto;
 
+  & a, button {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+  }
+  & h3, h4 {
+    margin: 0;
+    color: #FFF;
+  }
   & h3 {
-    font-size: 15px;
+    margin-top: -7px;
+    font-size: 17px;
+    height: 50%;
+    padding-top: 10%;
+  }
+  & h4 {
+    font-size: 11px;
+    height: 40%;
   }
   & button {
     background-color: #0047ff;
@@ -52,6 +67,7 @@ const NewTaskFormContainer = styled.div`
     height: 100%;
     width: 100%;
   }
+  media(min-width: width: 18% !important;)
 `;
 
 export {};

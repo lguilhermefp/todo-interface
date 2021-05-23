@@ -1,27 +1,41 @@
+import React, { useEffect } from 'react';
 import TaskListItem from './TaskListItem';
-import { removeTask, updateTaskDetails, markTaskAsCompleted } from '../redux-store/actions';
+import { loadTasks, removeTaskRequest, completeTaskRequest, updateTaskRequest, loadOnlyTaskRequest } from  '../redux-store/thunks';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { ITask } from '../redux-store/reducers';
 
-function TaskList({ tasks=[], onRemovePressed, onUpdatePressed, onCompletePressed } : any) : JSX.Element  {
-    return(
-        <TasksWrapper>
-              {tasks.map((task : any) => 
-                <TaskListItem
-                  task={task}
-                  key={task.guid}
-                  onRemovePressed={onRemovePressed}
-                  onUpdatePressed={onUpdatePressed}
-                  onCompletePressed={onCompletePressed}
-                  />
-              )}
-        </TasksWrapper>
-    );
+interface IProps {
+  tasks : ITask[],
+  onRemovePressed() : ITask[],
+  onUpdatePressed() : ITask[],
+  onCompletePressed() : ITask[]
 }
 
+function TaskList({ tasks=[], onRemovePressed, onUpdatePressed, onCompletePressed, isLoading, startLoadingTasks } : any) : JSX.Element  {
+  useEffect(() => {
+    startLoadingTasks();
+  }, []);
+
+  const loadingMessage = <div>Carregando tarefas</div>;
+  const content = (
+    <TasksWrapper>
+      {tasks.map((task : any) =>
+        <TaskListItem
+          task={task}
+          key={task.guid}
+          onUpdatePressed={onUpdatePressed}
+          onRemovePressed={onRemovePressed}
+          onCompletePressed={onCompletePressed}
+          />
+      )}
+    </TasksWrapper>
+  );
+  return isLoading ? loadingMessage : content;
+};
+
 const TasksWrapper = styled.div`
-  min-height: 59vh;
-  margin-bottom: 3vh;
+  height: 50vh;
   overflow: auto;
 
   & > * {
@@ -30,13 +44,16 @@ const TasksWrapper = styled.div`
 `;
 
 const mapStateToProps = (state : any) => ({
-    tasks: state.tasks,
+  isLoading: state.isLoading,
+  tasks: state.tasks
 })
 
 const mapDispatchToProps = (dispatch : any) => ({
-    onRemovePressed: (guid : string) => dispatch(removeTask(guid)),
-    onUpdatePressed: (guid : string, title : string, description : string) => dispatch(updateTaskDetails(guid, title, description)),
-    onCompletePressed: (guid : string) => dispatch(markTaskAsCompleted(guid))
+    startLoadingTasks: () => dispatch(loadTasks()),
+    onRemovePressed: (guid : string) => dispatch(removeTaskRequest(guid)),
+    onCompletePressed: ({guid, title, description, situation}: ITask) => dispatch(completeTaskRequest(guid)),
+    onUpdatePressed: ({guid, title, description, situation} : ITask) => dispatch(updateTaskRequest({guid, title, description, situation})),
+    loadOnlyTaskRequest: (guid : string) => {dispatch(loadOnlyTaskRequest(guid))}
 })
 
 export { TaskList };

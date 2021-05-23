@@ -7,18 +7,43 @@ import cornerMenu from '../img/cornerMenu.svg';
 
 function Sidebar() : JSX.Element {
   return(
-    <>
-      <img src={cornerMenu} alt="menu"/>
+    <Container>
       <SideBarWrapper>
         <Logo />
         <UserCard />
         <Separator />
         <SideBarButtons />
       </SideBarWrapper>
-    </>
+      <div className="corner"><img src={cornerMenu} alt="menu" /></div>
+    </Container>
   );
 }
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  left: -210px;
+  transition-property: left;
+  transition-duration: 0.2s;
+
+  :hover,
+  :focus{
+    left: 0px;
+  }
+
+  & > .corner {
+    align-items: flex-start;
+    position: fixed;
+    left: 0;
+    margin: 1vh;
+    z-index: -1;
+  }
+
+  @media (min-width: 600px){
+    left: 0px;
+  }
+`;
 const SideBarWrapper : any = styled.div`
   display: flex;
   flex-direction: column;
@@ -32,11 +57,9 @@ const SideBarWrapper : any = styled.div`
   & a {
     text-decoration: none;
   }
-
-  @media(min-width: 420px){
     height: 100vh;
     max-width: 210px;
-  }
+
 `;
 
 export {};

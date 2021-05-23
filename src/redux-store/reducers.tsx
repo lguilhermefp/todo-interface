@@ -1,6 +1,34 @@
 
 import { PayloadAction } from 'typesafe-actions';
-import { CREATE_TASK, REMOVE_TASK, UPDATE_TASK_DETAILS, MARK_TASK_AS_COMPLETED } from './actions';
+import { 
+    CREATE_TASK,
+    REMOVE_TASK, 
+    UPDATE_TASK,
+    MARK_TASK_AS_COMPLETED,
+    LOAD_ONLY_TASK,
+    LOAD_TASKS_SUCCESS,
+    LOAD_TASKS_IN_PROGRESS,
+    LOAD_TASKS_FAILURE
+} from './actions';
+
+export const isLoading = (state = false, action : any) => {
+    const { type } = action;
+
+    switch(type) {
+        case LOAD_TASKS_IN_PROGRESS:
+            return true;
+        case LOAD_TASKS_SUCCESS:
+            return false;
+        case LOAD_TASKS_FAILURE:
+            return false;
+        default:
+            return state;
+    }
+}
+
+export interface ITasks {
+    tasks: ITask[]
+}
 
 export interface ITask {
     guid: string,
@@ -9,42 +37,54 @@ export interface ITask {
     situation: string
 }
 
-const INITIAL_STATE : ITask[] = [{
-    guid: '1',
-    title: '1',
-    description: '1',
-    situation: 'completed'
-}];
+const INITIAL_STATE : ITask[] = [];
 
-export const tasks = (state = INITIAL_STATE, action : PayloadAction<string, ITask>) => {
+export const tasks : any = (state : ITask[] = INITIAL_STATE, action : PayloadAction<any, any>) => {
     const { type, payload } = action;
 
     switch(type) {
         case CREATE_TASK: {
             const { guid, title, description } = payload;
-            const newTask : ITask = { guid, title, description, situation: 'notCompleted' };
+            const newTask : ITask = { guid: guid, title: title, description: description, situation: 'uncompleted' };
             return state.concat(newTask);
         };
         case REMOVE_TASK: {
-            const { guid } = payload;
-            return state.filter((task : ITask) => task.guid !== guid);
+            const { task: taskToRemove } = payload;
+            return state.filter((task : ITask) => task.guid !== taskToRemove.guid);
         };
-        case UPDATE_TASK_DETAILS: {
-            const { guid, title, description, situation } = payload;
-            return state.map((task : ITask) => {
-                if (task.guid === guid)
-                    return {...state, guid: guid, title: title, description: description, situation: situation}
-                return {...state};
+        case UPDATE_TASK: {
+            const { task: updatedTask} = payload;
+            return state.map((task) => {
+                if(task.guid === updatedTask.guid) {
+                    return {updatedTask}
+                }
+            return task;
             })
         };
         case MARK_TASK_AS_COMPLETED: {
-            const { guid, title, description } = payload;
+            const { task: taskToComplete } = payload;
             return state.map((task : ITask) => {
-                if (task.guid === guid)
-                    return {...state, guid: guid, title: title, description: description, situation: 'completed'};
-                return {...state};
+                if(task.guid === taskToComplete){
+                    return taskToComplete;
+                }
+                return task;
             })
         };
+        case LOAD_ONLY_TASK : {
+            const { guid } = payload;
+            return state.map((task: ITask) => {
+                if (task.guid === guid){
+                    return task;
+                }
+                return(task);
+            })
+        }
+        case LOAD_TASKS_SUCCESS: {
+            const { tasks } = payload;
+            return tasks;
+        }
+        case LOAD_TASKS_IN_PROGRESS: { return state; }
+        case LOAD_TASKS_FAILURE: { return state; }
+        default: { return state; }
     }
-    return state;
 }

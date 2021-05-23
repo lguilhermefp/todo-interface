@@ -31,6 +31,7 @@ const Avatar : any = styled.img`
   width: 35px;
   object-fit: cover;
   padding: 0 3%;
+  overflow: visible;
 `;
 const UserNameAndFunctionWrapper : any = styled.div`
   display: flex;

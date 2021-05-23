@@ -13,18 +13,18 @@ function Searchbar() : JSX.Element {
   }
   const SearchBarWrapper = styled.div`
     display: flex;
-    height: 8vh;
+    height: 11%;
     justify-content: bottom;
-    min-width: calc(85vw - 210px);
-    margin: 5vh 0;
+    margin-top: -1vh;
   
     & > div {
       display: flex;
       flex-direction: row;
       align-items: center;
-      height: 80%;
+      height: 60%;
       padding: 0 3vw;
       width: 100%;
+      max-width: 650px;
       border-radius: 3px;
       background-color: #DDD;
     }
@@ -37,6 +37,10 @@ function Searchbar() : JSX.Element {
       height: 65%;
       color: rgba(0, 0, 0, 1);
       font-size: 15px;
+    }
+
+    @media(min-width: 600px) {
+      margin-top: 9vh;
     }
   `;
 

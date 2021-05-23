@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+![Alt text](src/img/screenshot.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Visão Geral
 
-## Available Scripts
+Projeto inidivual em React.js para manuseio de tarefas inseridas numa API. Parte do processo seletivo para estágio da WLS Soluções, e da minha prática pessoal.
 
-In the project directory, you can run:
+## Tecnologias
 
-### `npm start`
+Desenvolvido em Typescript, possui manuseio de estado com redux e ações colaterais com thunks, além de bibliotecas como a Styled Components, que deixa o diretório mais organizado e facilita a modificação dos estilos dos componentes. O programa não conta com todo o potencial de potencial do Typescript pois apresentou mal funcionamento ao se adicionar tipagem forte, mas tal problema deve diminuir nas próximas versões. Se você está lendo isso, fique à vontade para dar um feedback e me ajudar a ser um programador melhor!
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Configuração
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Para instalar as dependências necessárias, faça o download dos arquivos e com node no diretório "/tasks-challenge/src/services" execute "npm install" e então "node dist/api.js". Este comando inicia um servidor express na porta 3333 e possui proxy configurado para acesso da API nessa porta. Minha motivação para usar esta configuração de servidor foi a necessidade de enfrentar o protocolo CORS que impedia certas requisições à API. Não obtive sucesso, mas não desisti de tentar e por isso o servidor ainda faz parte do programa. Execute o comando "npm install" no diretório "/tasks-challenge", e por último, npm start para que o servidor React abra na porta 3000.
 
-### `npm test`
+## Funcionalidades
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+O programa adiciona novas tarefas associadas a um servidor remoto, mostra as tarefas presentes do servidor e suas características e apaga a tarefa desejada.
 
-### `npm run build`
+## Minhas Dificuldades
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Minha maior dificuldade na execução do projeto foi quanto ao manuseamento de estado agregado à tipagem do typescript. O programa não
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Minha Experiência
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Foi muito prazerosa pra mim a realização deste projeto. Tive grande contato com tecnologias importantes para o mercado atual de uma área pela qual sou cada dia mais apaixonado, a de desenvolvimento front-end. Ver o redux thunks funcionando me deixou muito feliz e pretendo me aprofundar mu mais no ecossistema do React.js!

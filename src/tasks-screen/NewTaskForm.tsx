@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { createTask } from '../redux-store/actions';
+import { addTaskRequest } from '../redux-store/thunks';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import FormStyle from './Form';
 
 function NewTaskForm({ tasks, onCreatePressed } : any){
@@ -9,7 +10,7 @@ function NewTaskForm({ tasks, onCreatePressed } : any){
     const [inputTitleValue, setInputTitleValue] = useState('');
     const [inputDescriptionValue, setInputDescriptionValue] = useState('');
 
-    function createGuid() {
+    const createGuid = () => {
         function _p8(s : boolean) {
             var p = (Math.random().toString(16)+"000000000").substr(2, 8);
             return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p ;
@@ -17,30 +18,36 @@ function NewTaskForm({ tasks, onCreatePressed } : any){
         return _p8(false)+_p8(true)+_p8(true)+_p8(false);
     }
 
-    console.log('reached NewTaskForm');
-
     return(
         <NewFormStyleBackground>
             <NewFormStyle>
                 <h1 className="criar-tarefa">Criar tarefa</h1>
-                <input
-                    className="task-name"
-                    type="text"
-                    value={inputTitleValue}
-                    onChange={(e)=>setInputTitleValue(e.target.value)}></input>
-                <textarea
-                    className="task-description"
-                    value={inputDescriptionValue}
-                    cols={35}
-                    rows={2}
-                    onChange={(e)=>setInputDescriptionValue(e.target.value)}></textarea>
-                <button className="button-form-cancelar">Cancelar</button>
-                <button
+                <label className="label-task-name">Nome da tarefa
+                    <input
+                        className="task-name"
+                        type="text"
+                        value={inputTitleValue}
+                        onChange={(e)=>setInputTitleValue(e.target.value)}></input>
+                </label>
+                <label className="label-task-description">Descrição
+                    <textarea
+                        className="task-description"
+                        value={inputDescriptionValue}
+                        cols={35}
+                        rows={2}
+                        onChange={(e)=>setInputDescriptionValue(e.target.value)}></textarea>
+                </label>
+                <Link className="link-form-cancelar" to="/tasks">
+                    <button className="button-form-cancelar">CANCELAR</button>
+                </Link>
+                <Link className="link-form-create-task" to="/tasks">
+                    <button
                     className="button-form-create-task"
                     onClick={() => {
-                        onCreatePressed(createGuid(), inputTitleValue, inputDescriptionValue, 'notCompleted');
+                        onCreatePressed(createGuid(), inputTitleValue, inputDescriptionValue, 'uncompleted');
                         setInputTitleValue('');
-                        setInputDescriptionValue('')}}>create task</button>
+                        setInputDescriptionValue('')}}>CRIAR TAREFA</button>
+                </Link>
             </NewFormStyle>
         </NewFormStyleBackground>
     );
@@ -57,28 +64,66 @@ const NewFormStyleBackground = styled.div`
 const NewFormStyle = styled(FormStyle)`
     position: fixed;
     top: 25vh;
-    left: 25vw;
+    max-width: 510px;
+    left: 5vw;
     & h1 {
-        grid-row: 2/3;
-        grid-column: 2/4;
+        grid-row: 1/2;
+        grid-column: 2/6;
+        color: #000;
+        overflow: visible;
+        user-select: none;
     }
-    & input {
-        grid-row: 4/5;
+    & input,
+    & textarea {
+        padding: 5px;
+        grid-column: 2/6;
+        font-size: 18px;
+        border-radius: 8px;
+        background-color: #eee;
+        border: 2px solid rgba(0, 0, 0, 0.5);
+        width: 93.5%;
+    }
+    & .label-task-name {
+        grid-row: 4/6;
         grid-column: 2/6;
     }
-    & textarea {
+    & .task-name  {
+        grid-row: 4/6;
+    }
+    & .label-task-description {
         grid-row: 6/7;
         grid-column: 2/6;
     }
-    & button {
-        grid-row: 8/9;
-        border: 1px solid #000;
+    & .task-description {
+        height: 70%;
+        grid-row: 6/7;
+        font-size: 17px;
     }
-    & .button-form-create-task{
+    & a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        grid-row: 8/9;
+        color: #0047FF;
+        
+    }
+    & .link-form-create-task{
         grid-column: 5/6;
     }
-    & .button-form-cancelar{
+    & .link-form-cancelar{
         grid-column: 4/5;
+    }
+    & button {
+        font-size: 15px;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #0047FF;
+        border-radius: 5px;
+        margin: 0 5px;
+    }
+    @media (min-width: 600px) {
+        left: 20vw;
     }
 `;
 
@@ -86,7 +131,7 @@ const mapStateToProps = (state : any) => ({
     tasks: state.tasks
 });
 const mapDispatchToProps = (dispatch : any) => ({
-    onCreatePressed : (guid : string, title : string, description : string) => dispatch(createTask(guid, title, description))
+    onCreatePressed: (guid : string, title : string, description : string, situation : string) => dispatch(addTaskRequest({guid, title, description, situation}))
 });
 
 export { NewTaskForm };

@@ -4,7 +4,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  font-family: 'Roboto';
+  user-select: none;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+button {
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+* {
+  overflow-y: hidden;
 }
