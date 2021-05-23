@@ -2,7 +2,7 @@
 
 # Visão Geral
 
-Projeto individual em React.js para manuseio de tarefas inseridas numa API. Parte do processo seletivo para estágio da WLS Soluções, e da minha prática pessoal.
+Projeto individual em React.js para manuseio de tarefas inseridas numa API. Parte do processo seletivo para estágio da WLS Soluções, e parte da minha prática pessoal.
 
 ## Tecnologias
 
